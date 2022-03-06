@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Col, Container, Row } from "reactstrap";
 
-const JobEdit = () => {
+const JobEdit = (props) => {
   return (
     <div className="popup-box">
       <Container className="bg-white box">
@@ -26,7 +26,7 @@ const JobEdit = () => {
             <Button className="bg-danger text-white">Save</Button>
           </Col>
         </Row>
-        <span className="close-icon" >x</span>
+        <span className="close-icon" onClick={props.handleClose}>x</span>
       </Container>
     </div>
   );

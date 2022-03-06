@@ -5,7 +5,6 @@ import Nav from "./Nav.js"
 import List from "./List.js"
 import "./App.css"
 import Foot from './Foot.js'
-import JobEdit from './JobEdit.js'
 
 const App = () => {
   return (
@@ -15,7 +14,6 @@ const App = () => {
         <Create/>
         <List/>
         <Foot/>
-        <JobEdit/>
       </Container>
     </div>
   )

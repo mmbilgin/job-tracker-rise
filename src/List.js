@@ -4,19 +4,26 @@ import {
   faEdit,
   faRemove,
 } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Table, Col } from "reactstrap";
+import JobEdit from "./JobEdit";
 
 const List = () => {
+    const [isOpen, setIsOpen] = useState(false);
+ 
+    const togglePopup = () => {
+      setIsOpen(!isOpen);
+    }
   return (
     <div>
+          {isOpen && <JobEdit handleClose={togglePopup}/>}
       <Container>
         <Row className="jobListRow">
           <Row>Job List</Row>
           <Row>
             <Col>
               <div className="searchContainer">
-                <input className="searchInput" type="text" id="input" value />
+                <input className="searchInput" type="text" id="input" />
                 <FontAwesomeIcon
                   icon={faMagnifyingGlass}
                   className="searchImage "
@@ -46,7 +53,7 @@ const List = () => {
                   <td>birinci iş</td>
                   <td><div className="p-2 bg-danger text-white">Acil</div></td>
                   <td>
-                    <button className="btn btn-secondary m-1">
+                    <button className="btn btn-secondary m-1" onClick={togglePopup}>
                       <FontAwesomeIcon icon={faEdit} /> 
                     </button>
                     <button className="btn btn-secondary">
@@ -57,7 +64,7 @@ const List = () => {
                 <tr>
                   <td>ikinci iş</td>
                   <td><div className="p-2 bg-primary text-white">Normal</div></td>
-                  <td><button className="btn btn-secondary m-1">
+                  <td><button className="btn btn-secondary m-1" onClick={togglePopup}>
                       <FontAwesomeIcon icon={faEdit} /> 
                     </button>
                     <button className="btn btn-secondary">
@@ -67,7 +74,7 @@ const List = () => {
                 <tr>
                   <td>üçüncü iş</td>
                   <td><div className="p-2 bg-warning text-white">Önemli</div></td>
-                  <td><button className="btn btn-secondary m-1">
+                  <td><button className="btn btn-secondary m-1" onClick={togglePopup}>
                       <FontAwesomeIcon icon={faEdit} /> 
                     </button>
                     <button className="btn btn-secondary">
