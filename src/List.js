@@ -7,16 +7,19 @@ import {
 import React, { useState } from "react";
 import { Container, Row, Table, Col } from "reactstrap";
 import JobEdit from "./JobEdit";
+import { useSelector } from "react-redux";
+import Job from "./Job";
 
 const List = () => {
-    const [isOpen, setIsOpen] = useState(false);
- 
-    const togglePopup = () => {
-      setIsOpen(!isOpen);
-    }
+  const [isOpen, setIsOpen] = useState(false);
+  const jobs = useSelector((state) => state.jobReducer.jobs);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div>
-          {isOpen && <JobEdit handleClose={togglePopup}/>}
+      {isOpen && <JobEdit handleClose={togglePopup} />}
       <Container>
         <Row className="jobListRow">
           <Row>Job List</Row>
@@ -49,38 +52,11 @@ const List = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>birinci iş</td>
-                  <td><div className="p-2 bg-danger text-white">Acil</div></td>
-                  <td>
-                    <button className="btn btn-secondary m-1" onClick={togglePopup}>
-                      <FontAwesomeIcon icon={faEdit} /> 
-                    </button>
-                    <button className="btn btn-secondary">
-                      <FontAwesomeIcon icon={faRemove} />
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>ikinci iş</td>
-                  <td><div className="p-2 bg-primary text-white">Normal</div></td>
-                  <td><button className="btn btn-secondary m-1" onClick={togglePopup}>
-                      <FontAwesomeIcon icon={faEdit} /> 
-                    </button>
-                    <button className="btn btn-secondary">
-                      <FontAwesomeIcon icon={faRemove} />
-                    </button></td>
-                </tr>
-                <tr>
-                  <td>üçüncü iş</td>
-                  <td><div className="p-2 bg-warning text-white">Önemli</div></td>
-                  <td><button className="btn btn-secondary m-1" onClick={togglePopup}>
-                      <FontAwesomeIcon icon={faEdit} /> 
-                    </button>
-                    <button className="btn btn-secondary">
-                      <FontAwesomeIcon icon={faRemove} />
-                    </button></td>
-                </tr>
+                {jobs &&
+                  jobs.map((job) => {
+                      console.log(job);
+                    return <Job key={job.id} togglePopup={togglePopup} jobText={job.text} jobPri={job.priority}  />;
+                  })}
               </tbody>
             </Table>
           </Row>
