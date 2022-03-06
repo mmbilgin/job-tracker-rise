@@ -5,7 +5,7 @@ import {
   faRemove,
 } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import { Container, Row, Table, Col, Button } from "reactstrap";
+import { Container, Row, Table, Col } from "reactstrap";
 
 const List = () => {
   return (
