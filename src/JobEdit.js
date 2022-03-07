@@ -18,10 +18,10 @@ const JobEdit = (props) => {
   }, []);
 
   return (
-    <div className="popup-box">
+    <div className="popup-box jobEditBox">
       <Container className="bg-white box">
-        <Row>Job Edit</Row>
-        <Row>Job Name</Row>
+        <Row className="title">Job Edit</Row>
+        <Row className="subtitle">Job Name</Row>
         <Row>
           <input
             id="job_name"
@@ -29,7 +29,7 @@ const JobEdit = (props) => {
             onChange={(event) => setEditText(event.target.value)}
           ></input>
         </Row>
-        <Row>Job Priority</Row>
+        <Row className="subtitle">Job Priority</Row>
         <Row>
           <select
             name="priority"
@@ -42,7 +42,7 @@ const JobEdit = (props) => {
             })}
           </select>
         </Row>
-        <Row>
+        <Row className="buttons">
           <Col>
             <Button
               className="bg-secondary text-white"
