@@ -1,0 +1,24 @@
+{
+    "priorities": [
+        {
+            "id":1,
+            "name":"Normal",
+            "value":"normal"
+        },
+        {
+            "id":4,
+            "name":"Az önemli",
+            "value":"azonemli"
+        },
+        {
+            "id":2,
+            "name":"Önemli",
+            "value":"onemli"
+        },
+        {
+            "id":3,
+            "name":"Acil",
+            "value":"acil"
+        }
+    ]
+}
