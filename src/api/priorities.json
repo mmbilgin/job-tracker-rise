@@ -3,22 +3,26 @@
         {
             "id":1,
             "name":"Normal",
-            "value":"normal"
+            "value":"normal",
+            "intValue":1
         },
         {
             "id":4,
             "name":"Az önemli",
-            "value":"azonemli"
+            "value":"azonemli",
+            "intValue":2
         },
         {
             "id":2,
             "name":"Önemli",
-            "value":"onemli"
+            "value":"onemli",
+            "intValue":3
         },
         {
             "id":3,
             "name":"Acil",
-            "value":"acil"
+            "value":"acil",
+            "intValue":4
         }
     ]
 }

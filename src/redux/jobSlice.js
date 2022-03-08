@@ -27,6 +27,7 @@ export const jobSlice = createSlice({
         id: state.lastId + 1,
         text: action.payload.text,
         priority: action.payload.priority,
+        priorityId: action.payload.priorityId
       });
       state.lastId++;
       updateLocalStorage(state);

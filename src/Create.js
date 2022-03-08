@@ -3,63 +3,76 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { add_job } from "./redux/jobSlice";
 
-const Body = () => {
-  const jobs = useSelector((state) => state.jobReducer.jobs);
+const Create = () => {
   const lastId = useSelector((state) => state.jobReducer.lastId);
   const [text, setText] = useState("");
-  const [pri, setPri] = useState("");
+  const [pri, setPri] = useState("normal");
+  const [priInt, setPriInt] = useState(1);
+  const [valid,setValid] = useState(true)
 
   const priorities = useSelector((state) => state.jobReducer.priorities);
 
   const dispatch = useDispatch();
-  const ekle = (text, priority) => {
-    dispatch(add_job({ id: lastId + 1, text: text, priority: priority }));
-    setText("");
-    setPri("normal");
-    console.log(jobs);
+  const ekle = (text, priority, intValue) => {
+    if (text === "") {
+      setValid(false);
+    } else {
+      dispatch(add_job({ id: lastId + 1, text: text, priority: priority , priorityId: intValue }));
+      setText("");
+      setPri("normal");
+      setPriInt(1);
+      //console.log(jobs);
+    }
   };
-
   return (
     <div>
       <Container>
         <Row className="createRow">
           <Row className="title">Create New Job</Row>
           <Row className="other">
-            <Col xs="6">
+            <Col xs="7" md="6">
               <Row className="subtitle">Job Name</Row>
               <Row>
                 <input
                   type="text"
-                  className="job-name"
+                  className={(valid?"":"formNotValid")+" job-name"}
+                  id="createText"
                   value={text}
-                  onChange={(event) => setText(event.target.value)}
+                  onChange={(event) => {
+                    setValid(true);
+                    setText(event.target.value)}}
                 />
               </Row>
             </Col>
 
-            <Col xs="4" className="other">
+            <Col xs="5" md="4" className="other">
               <Row className="subtitle">Job Priority</Row>
               <Row>
                 <select
                   name="priority"
                   id="priority"
                   value={pri}
-                  onChange={(event) => setPri(event.target.value)}
+                  onChange={(event) => 
+                    {
+                      setPriInt(parseInt(event.target.options[event.target.selectedIndex].getAttribute('intvalue')))
+                      setPri(event.target.value)
+                    }
+                   }
                 >
                   {priorities.map((priority) => {
                     return (
-                      <option value={priority.value}>{priority.name}</option>
+                      <option key={priority.id} value={priority.value} intvalue={priority.intValue}>{priority.name}</option>
                     );
                   })}
                 </select>
               </Row>
             </Col>
-            <Col xs="2">
+            <Col md="2" xs="12">
               <Row>
                 <br />
               </Row>
               <Row>
-                <Button color="primary" onClick={() => ekle(text, pri)}>
+                <Button color="primary" onClick={() => ekle(text, pri, priInt)}>
                   Create
                 </Button>
               </Row>
@@ -71,4 +84,4 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default Create;

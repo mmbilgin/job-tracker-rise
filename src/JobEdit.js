@@ -6,10 +6,16 @@ import { edit_job } from "./redux/jobSlice";
 const JobEdit = (props) => {
   const [editText, setEditText] = useState("");
   const [editPri, setEditPri] = useState("normal");
+  const [valid,setValid] = useState(true)
+
   const dispatch = useDispatch();
   const duzenle = (id, text, priority) => {
-    dispatch(edit_job({ id: id, text: text, priority: priority }));
-    props.handleClose();
+    if (text === "") {
+      setValid(false);
+    } else {
+      dispatch(edit_job({ id: id, text: text, priority: priority }));
+      props.handleClose();
+    }
   };
   const priorities = useSelector((state) => state.jobReducer.priorities);
   useEffect(() => {
@@ -26,7 +32,10 @@ const JobEdit = (props) => {
           <input
             id="job_name"
             value={editText}
-            onChange={(event) => setEditText(event.target.value)}
+            className={valid?"":"formNotValid"}
+            onChange={(event) => {
+              setValid(true);
+              setEditText(event.target.value)}}
           ></input>
         </Row>
         <Row className="subtitle">Job Priority</Row>
@@ -38,7 +47,7 @@ const JobEdit = (props) => {
             onChange={(event) => setEditPri(event.target.value)}
           >
             {priorities.map((priority) => {
-              return <option value={priority.value}>{priority.name}</option>;
+              return <option key={priority.id} value={priority.value}>{priority.name}</option>;
             })}
           </select>
         </Row>

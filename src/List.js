@@ -38,7 +38,7 @@ const List = () => {
         <Row className="jobListRow">
           <Row className="title">Job List</Row>
           <Row>
-            <Col xs="9">
+            <Col md="9" xs="7">
               <div className="searchContainer">
                 <input
                   className="searchInput"
@@ -53,7 +53,7 @@ const List = () => {
                 />
               </div>
             </Col>
-            <Col xs="3">
+            <Col md="3" xs="5">
               <select
                 name="priority"
                 id="priority"
@@ -63,7 +63,7 @@ const List = () => {
                 <option value="all">Öncelik(Hepsi)</option>
                 {priorities.map((priority) => {
                   return (
-                    <option value={priority.value}>{priority.name}</option>
+                    <option key={priority.id} value={priority.value}>{priority.name}</option>
                   );
                 })}
               </select>
@@ -73,9 +73,9 @@ const List = () => {
             <Table striped>
               <thead>
                 <tr>
-                  <th className="w-50">Name</th>
-                  <th>Priority</th>
-                  <th>Action</th>
+                  <th className="w-auto">Name</th>
+                  <th style={{width:"150px"}}>Priority</th>
+                  <th style={{width:"110px"}}>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -87,13 +87,14 @@ const List = () => {
                         : job.priority === filterPriority
                     )
                     .filter((job) => job.text.includes(filterSearch))
+                    .sort((a,b) => b.priorityId - a.priorityId)
                     .map((job) => {
                       return (
                         <Job
                           key={job.id}
                           togglePopup={togglePopup}
                           jobText={job.text}
-                          jobPri={job.priority}
+                          jobPri={priorities.filter(pri=>pri.value===job.priority)[0].name}
                           jobId={job.id}
                         />
                       );

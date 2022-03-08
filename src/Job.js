@@ -25,7 +25,7 @@ const Job = ({ togglePopup, jobText, jobPri, jobId }) => {
         >
           <FontAwesomeIcon icon={faEdit} />
         </button>
-        <button className="btn btn-secondary" onClick={() => sil(jobId)}>
+        <button className="btn btn-secondary m-1" onClick={() => sil(jobId)}>
           <FontAwesomeIcon icon={faRemove} />
         </button>
       </td>

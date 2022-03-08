@@ -21,7 +21,7 @@ const App = () => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(set_priorities(json.priorities));
-        console.log(priorities);
+        //console.log(json.priorities);
       });
   }, []);
 
