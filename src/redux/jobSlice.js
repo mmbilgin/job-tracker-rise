@@ -7,9 +7,16 @@ const lastIdFromLocalStorage = JSON.parse(
 );
 const defaultPriorities = [
   { id: 1, name: "Normal", value: "normal", intValue: 1, color: "gray" },
-  { id: 2, name: "Onemli", value: "onemli", intValue: 2,color: "orange"},
+  { id: 2, name: "Önemli", value: "onemli", intValue: 2,color: "orange"},
   { id: 3, name: "Acil", value: "acil", intValue: 3,color: "red"},
 ];
+const initialAlertBox = 
+{
+  show:false,
+  color:"white",
+  bgColor:"orange",
+  text:""
+};
 const updateLocalStorage = (state) => {
   localStorage.setItem("jobs-jt", JSON.stringify(state.jobs));
   localStorage.setItem("lastID-jt", JSON.stringify(state.lastId));
@@ -20,6 +27,7 @@ export const jobSlice = createSlice({
     jobs: jobsFromLocalStorage,
     lastId: lastIdFromLocalStorage,
     priorities: defaultPriorities,
+    alertBox: initialAlertBox
   },
   reducers: {
     add_job: (state, action) => {
@@ -45,10 +53,13 @@ export const jobSlice = createSlice({
       state.priorities = action.payload;
       localStorage.setItem("priorities-jt", JSON.stringify(state.priorities));
     },
+    set_alert: (state, action) => {
+      state.alertBox = action.payload;
+    },
   },
 });
 
-export const { add_job, remove_job, edit_job, set_priorities } =
+export const { add_job, remove_job, edit_job, set_priorities , set_alert} =
   jobSlice.actions;
 
 export default jobSlice.reducer;

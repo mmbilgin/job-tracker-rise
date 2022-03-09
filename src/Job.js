@@ -4,13 +4,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { remove_job } from "./redux/jobSlice";
 
-const Job = ({ togglePopup, jobText, jobPri,jobPriText, jobId , jobPriId}) => {
+const Job = ({ togglePopup, jobText, jobPri,jobPriText, jobId , jobPriId ,showAlert}) => {
   const priorities = useSelector((state) => state.jobReducer.priorities);
   const dispatch = useDispatch();
   const sil = (text, priority) => {
     dispatch(remove_job({ id: jobId }));
+    showAlert("Seçilen iş silindi.","blue","white")
   };
-//console.log(priorities.filter(pri => pri.intValue === jobPriId)[0].color)
   return (
     <tr>
       <td>{jobText}</td>

@@ -168,3 +168,23 @@ select {
 }
 
 
+.alertBox{
+  position: fixed;
+  top: 58px;
+  float: right;
+  right: 0;
+  width:42%;
+  height: 55px;
+  border-radius: 10px;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  color:white;
+  background-color: orange;
+  opacity:0;
+  -webkit-transition: right 0.8s,opacity 0.8s;
+    transition: right 0.8s,opacity 0.8s;
+}

@@ -6,7 +6,7 @@ import JobEdit from "./JobEdit";
 import { useSelector } from "react-redux";
 import Job from "./Job";
 
-const List = () => {
+const List = ({showAlert}) => {
   const [isOpen, setIsOpen] = useState(false);
   const jobs = useSelector((state) => state.jobReducer.jobs);
   const [editText, setEditText] = useState("");
@@ -35,6 +35,7 @@ const List = () => {
           editPri={editPri}
           editPriId={editPriId}
           handleClose={togglePopup}
+          showAlert={showAlert}
         />
       )}
       <Container>
@@ -102,6 +103,7 @@ const List = () => {
                           jobPri={job.priority}
                           jobId={job.id}
                           jobPriId={job.priorityId}
+                          showAlert={showAlert}
                         />
                       );
                     })}

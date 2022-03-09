@@ -3,7 +3,7 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { add_job } from "./redux/jobSlice";
 
-const Create = () => {
+const Create = ({showAlert}) => {
   const lastId = useSelector((state) => state.jobReducer.lastId);
   const [text, setText] = useState("");
   const [pri, setPri] = useState("normal");
@@ -21,7 +21,7 @@ const Create = () => {
       setText("");
       setPri("normal");
       setPriInt(1);
-      //console.log(jobs);
+      showAlert("Yeni bir iş başarıyla eklendi.","orange","white")
     }
   };
   return (

@@ -16,6 +16,7 @@ const JobEdit = (props) => {
     } else {
       dispatch(edit_job({ id: id, text: text, priority: priority, priorityId:priorityId }));
       props.handleClose();
+      props.showAlert("Seçilen iş düzenlendi.","green","white")
     }
   };
   const priorities = useSelector((state) => state.jobReducer.priorities);

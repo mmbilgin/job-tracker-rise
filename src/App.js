@@ -7,14 +7,28 @@ import "./App.css";
 import Foot from "./Foot.js";
 import { useDispatch } from "react-redux";
 
-import { set_priorities } from "./redux/jobSlice";
+import { set_alert, set_priorities } from "./redux/jobSlice";
+import AlertBox from "./AlertBox.js";
 
 const App = () => {
   const dispatch = useDispatch();
-  const pageUri = window.location.href.substring(0,window.location.href.length-1);
-  console.log(pageUri)
+  const pageUrl = "http://localhost:8080";
+
+  const showAlert = (text,bgColor,color) =>{
+    dispatch(set_alert({show:true,bgColor:bgColor, color:color, text:text}));
+    let count = 2;  
+    let timer = setInterval(function() {
+      if(count<=0){
+        clearInterval(timer);
+        dispatch(set_alert({show:false,bgColor:bgColor, color:color, text:text}));
+      }
+      count--;
+      }, 1000)
+        
+  }
+
   useEffect(() => {
-    fetch(pageUri+":8080/priorities", {
+    fetch(pageUrl+"/priorities", {
       method: "GET",
       mode: "cors",
       headers: {},
@@ -31,8 +45,9 @@ const App = () => {
     <div>
       <Container>
         <Nav />
-        <Create />
-        <List />
+        <AlertBox/>
+        <Create showAlert={showAlert} />
+        <List showAlert={showAlert}/>
         <Foot />
       </Container>
     </div>
