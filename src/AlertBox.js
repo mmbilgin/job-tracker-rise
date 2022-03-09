@@ -7,7 +7,7 @@ const AlertBox = (props) => {
   return (
     <div
       className="alertBox"
-      style={{ "background-color": alertBox.bgColor, color: alertBox.color, opacity:alertBox.show?1:0, right:alertBox.show?"10%":0 }}
+      style={{ backgroundColor: alertBox.bgColor, color: alertBox.color, opacity:alertBox.show?1:0, right:alertBox.show?"10%":0 }}
     >
       {alertBox.text}
     </div>

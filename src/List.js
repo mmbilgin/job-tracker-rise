@@ -93,7 +93,7 @@ const List = ({showAlert}) => {
                     .filter((job) => job.text.includes(filterSearch))
                     .sort((a,b) => b.priorityId - a.priorityId)
                     .map((job) => {
-                      //console.log(priorities)
+                      //console.log(jobs)
                       return (
                         <Job
                           key={job.id}

@@ -3,12 +3,12 @@ import { Container, Row, Col, Button } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { add_job } from "./redux/jobSlice";
 
-const Create = ({showAlert}) => {
+const Create = ({ showAlert }) => {
   const lastId = useSelector((state) => state.jobReducer.lastId);
   const [text, setText] = useState("");
   const [pri, setPri] = useState("normal");
   const [priInt, setPriInt] = useState(1);
-  const [valid,setValid] = useState(true)
+  const [valid, setValid] = useState(true);
 
   const priorities = useSelector((state) => state.jobReducer.priorities);
 
@@ -17,11 +17,18 @@ const Create = ({showAlert}) => {
     if (text === "") {
       setValid(false);
     } else {
-      dispatch(add_job({ id: lastId + 1, text: text, priority: priority , priorityId: intValue }));
+      dispatch(
+        add_job({
+          id: lastId + 1,
+          text: text,
+          priority: priority,
+          priorityId: intValue,
+        })
+      );
       setText("");
       setPri("normal");
       setPriInt(1);
-      showAlert("Yeni bir iş başarıyla eklendi.","orange","white")
+      showAlert("Yeni bir iş başarıyla eklendi.", "orange", "white");
     }
   };
   return (
@@ -35,12 +42,13 @@ const Create = ({showAlert}) => {
               <Row>
                 <input
                   type="text"
-                  className={(valid?"":"formNotValid")+" job-name"}
+                  className={(valid ? "" : "formNotValid") + " job-name"}
                   id="createText"
                   value={text}
                   onChange={(event) => {
                     setValid(true);
-                    setText(event.target.value)}}
+                    setText(event.target.value);
+                  }}
                 />
               </Row>
             </Col>
@@ -52,16 +60,26 @@ const Create = ({showAlert}) => {
                   name="priority"
                   id="priority"
                   value={pri}
-                  onChange={(event) => 
-                    {
-                      setPriInt(parseInt(event.target.options[event.target.selectedIndex].getAttribute('intvalue')))
-                      setPri(event.target.value)
-                    }
-                   }
+                  onChange={(event) => {
+                    setPriInt(
+                      parseInt(
+                        event.target.options[
+                          event.target.selectedIndex
+                        ].getAttribute("intvalue")
+                      )
+                    );
+                    setPri(event.target.value);
+                  }}
                 >
                   {priorities.map((priority) => {
                     return (
-                      <option key={priority.id} value={priority.value} intvalue={priority.intValue}>{priority.name}</option>
+                      <option
+                        key={priority.id}
+                        value={priority.value}
+                        intvalue={priority.intValue}
+                      >
+                        {priority.name}
+                      </option>
                     );
                   })}
                 </select>

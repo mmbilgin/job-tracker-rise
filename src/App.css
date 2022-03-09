@@ -188,3 +188,18 @@ select {
   -webkit-transition: right 0.8s,opacity 0.8s;
     transition: right 0.8s,opacity 0.8s;
 }
+
+
+
+.jtr-popup .box{
+  padding: 30px !important;
+  text-align: center;
+
+}
+.jtr-popup .row{
+  margin-top:20px;
+}
+.jtr-popup Button{
+  margin-left:10px;
+  margin-right:10px;
+}

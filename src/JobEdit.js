@@ -7,16 +7,23 @@ const JobEdit = (props) => {
   const [editText, setEditText] = useState("");
   const [editPri, setEditPri] = useState("normal");
   const [editPriId, setEditPriId] = useState(1);
-  const [valid,setValid] = useState(true)
+  const [valid, setValid] = useState(true);
 
   const dispatch = useDispatch();
-  const duzenle = (id, text, priority,priorityId) => {
+  const duzenle = (id, text, priority, priorityId) => {
     if (text === "") {
       setValid(false);
     } else {
-      dispatch(edit_job({ id: id, text: text, priority: priority, priorityId:priorityId }));
+      dispatch(
+        edit_job({
+          id: id,
+          text: text,
+          priority: priority,
+          priorityId: priorityId,
+        })
+      );
       props.handleClose();
-      props.showAlert("Seçilen iş düzenlendi.","green","white")
+      props.showAlert("Seçilen iş düzenlendi.", "green", "white");
     }
   };
   const priorities = useSelector((state) => state.jobReducer.priorities);
@@ -25,7 +32,7 @@ const JobEdit = (props) => {
     setEditText(props.editText);
     setEditPriId(props.editPriId);
     //console.log(props)
-  },[props.editPri, props.editText,props.editPriId]);
+  }, [props.editPri, props.editText, props.editPriId]);
 
   return (
     <div className="popup-box jobEditBox">
@@ -34,12 +41,14 @@ const JobEdit = (props) => {
         <Row className="subtitle">Job Name</Row>
         <Row>
           <input
+            disabled
             id="job_name"
             value={editText}
-            className={valid?"":"formNotValid"}
+            className={valid ? "" : "formNotValid"}
             onChange={(event) => {
               setValid(true);
-              setEditText(event.target.value)}}
+              setEditText(event.target.value);
+            }}
           ></input>
         </Row>
         <Row className="subtitle">Job Priority</Row>
@@ -49,12 +58,26 @@ const JobEdit = (props) => {
             id="priority"
             value={editPri || "normal"}
             onChange={(event) => {
-              setEditPriId(parseInt(event.target.options[event.target.selectedIndex].getAttribute('intvalue')))
-              setEditPri(event.target.value)}
-            }
+              setEditPriId(
+                parseInt(
+                  event.target.options[event.target.selectedIndex].getAttribute(
+                    "intvalue"
+                  )
+                )
+              );
+              setEditPri(event.target.value);
+            }}
           >
             {priorities.map((priority) => {
-              return <option key={priority.id} intvalue={priority.intValue} value={priority.value}>{priority.name}</option>;
+              return (
+                <option
+                  key={priority.id}
+                  intvalue={priority.intValue}
+                  value={priority.value}
+                >
+                  {priority.name}
+                </option>
+              );
             })}
           </select>
         </Row>
@@ -70,7 +93,9 @@ const JobEdit = (props) => {
           <Col>
             <Button
               className="bg-danger text-white"
-              onClick={() => duzenle(props.editId, editText, editPri,editPriId)}
+              onClick={() =>
+                duzenle(props.editId, editText, editPri, editPriId)
+              }
             >
               Save
             </Button>
