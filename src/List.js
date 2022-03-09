@@ -11,16 +11,18 @@ const List = () => {
   const jobs = useSelector((state) => state.jobReducer.jobs);
   const [editText, setEditText] = useState("");
   const [editPri, setEditPri] = useState("normal");
+  const [editPriId, setEditPriId] = useState(1);
   const [editId, setEditId] = useState(-1);
   const [filterPriority, setFilterPriority] = useState("all");
   const [filterSearch, setFilterSearch] = useState("");
 
   const priorities = useSelector((state) => state.jobReducer.priorities);
 
-  const togglePopup = (id, text, pri) => {
+  const togglePopup = (id, text, pri,priId) => {
     setEditId(id);
     setEditPri(pri);
     setEditText(text);
+    setEditPriId(priId);
     setIsOpen(!isOpen);
   };
 
@@ -31,6 +33,7 @@ const List = () => {
           editId={editId}
           editText={editText}
           editPri={editPri}
+          editPriId={editPriId}
           handleClose={togglePopup}
         />
       )}
@@ -89,13 +92,16 @@ const List = () => {
                     .filter((job) => job.text.includes(filterSearch))
                     .sort((a,b) => b.priorityId - a.priorityId)
                     .map((job) => {
+                      //console.log(priorities)
                       return (
                         <Job
                           key={job.id}
                           togglePopup={togglePopup}
                           jobText={job.text}
-                          jobPri={priorities.filter(pri=>pri.value===job.priority)[0].name}
+                          jobPriText={priorities.filter(pri=>pri.value===job.priority)[0]?priorities.filter(pri=>pri.value===job.priority)[0].name:job.priority}
+                          jobPri={job.priority}
                           jobId={job.id}
+                          jobPriId={job.priorityId}
                         />
                       );
                     })}

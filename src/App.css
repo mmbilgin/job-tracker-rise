@@ -69,6 +69,10 @@
   width: 200px;
 }
 
+.createRow{
+  justify-content: center;
+}
+
 .createRow .title {
   font-size: 18px;
   font-weight: bold;
@@ -90,6 +94,7 @@ select {
 
 .jobListRow {
   padding-top: 30px;
+  justify-content: center;
 }
 
 .jobListRow .title {

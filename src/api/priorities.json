@@ -4,25 +4,36 @@
             "id":1,
             "name":"Normal",
             "value":"normal",
-            "intValue":1
+            "intValue":1,
+            "color":"gray"
         },
         {
             "id":4,
             "name":"Az önemli",
             "value":"azonemli",
-            "intValue":2
+            "intValue":2,
+            "color":"yellow"
         },
         {
             "id":2,
             "name":"Önemli",
             "value":"onemli",
-            "intValue":3
+            "intValue":3,
+            "color":"orange"
         },
         {
             "id":3,
             "name":"Acil",
             "value":"acil",
-            "intValue":4
+            "intValue":4,
+            "color":"red"
+        },
+        {
+            "id":5,
+            "name":"Çok Acil",
+            "value":"cokacil",
+            "intValue":5,
+            "color":"darkred"
         }
     ]
 }

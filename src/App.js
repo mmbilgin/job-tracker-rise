@@ -5,12 +5,11 @@ import Nav from "./Nav.js";
 import List from "./List.js";
 import "./App.css";
 import Foot from "./Foot.js";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { set_priorities } from "./redux/jobSlice";
 
 const App = () => {
-  const priorities = useSelector((state) => state.jobReducer.priorities);
   const dispatch = useDispatch();
   useEffect(() => {
     fetch("http://localhost:8080/priorities", {
@@ -21,9 +20,10 @@ const App = () => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(set_priorities(json.priorities));
-        //console.log(json.priorities);
+        console.log("Priorities from API: ");
+        console.log(json.priorities);
       });
-  }, []);
+  });
 
   return (
     <div>

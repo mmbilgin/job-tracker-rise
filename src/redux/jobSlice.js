@@ -6,9 +6,9 @@ const lastIdFromLocalStorage = JSON.parse(
   localStorage.getItem("lastID-jt") || 0
 );
 const defaultPriorities = [
-  { id: 1, name: "Normal", value: "normal" },
-  { id: 2, name: "Onemli", value: "onemli" },
-  { id: 3, name: "Acil", value: "acil" },
+  { id: 1, name: "Normal", value: "normal", intValue: 1 },
+  { id: 2, name: "Onemli", value: "onemli", intValue: 2 },
+  { id: 3, name: "Acil", value: "acil", intValue: 3 },
 ];
 const updateLocalStorage = (state) => {
   localStorage.setItem("jobs-jt", JSON.stringify(state.jobs));
@@ -27,7 +27,7 @@ export const jobSlice = createSlice({
         id: state.lastId + 1,
         text: action.payload.text,
         priority: action.payload.priority,
-        priorityId: action.payload.priorityId
+        priorityId: action.payload.priorityId,
       });
       state.lastId++;
       updateLocalStorage(state);
@@ -43,6 +43,7 @@ export const jobSlice = createSlice({
     },
     set_priorities: (state, action) => {
       state.priorities = action.payload;
+      localStorage.setItem("priorities-jt", JSON.stringify(state.priorities));
     },
   },
 });

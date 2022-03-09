@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { remove_job } from "./redux/jobSlice";
 
-const Job = ({ togglePopup, jobText, jobPri, jobId }) => {
+const Job = ({ togglePopup, jobText, jobPri,jobPriText, jobId , jobPriId}) => {
   const dispatch = useDispatch();
   const sil = (text, priority) => {
     dispatch(remove_job({ id: jobId }));
@@ -14,13 +14,13 @@ const Job = ({ togglePopup, jobText, jobPri, jobId }) => {
     <tr>
       <td>{jobText}</td>
       <td>
-        <div className="p-2 bg-danger text-white">{jobPri}</div>
+        <div className="p-2 bg-danger text-white">{jobPriText}</div>
       </td>
       <td>
         <button
           className="btn btn-secondary m-1"
           onClick={() => {
-            togglePopup(jobId, jobText, jobPri);
+            togglePopup(jobId, jobText, jobPri,jobPriId);
           }}
         >
           <FontAwesomeIcon icon={faEdit} />

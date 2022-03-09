@@ -6,14 +6,15 @@ import { edit_job } from "./redux/jobSlice";
 const JobEdit = (props) => {
   const [editText, setEditText] = useState("");
   const [editPri, setEditPri] = useState("normal");
+  const [editPriId, setEditPriId] = useState(1);
   const [valid,setValid] = useState(true)
 
   const dispatch = useDispatch();
-  const duzenle = (id, text, priority) => {
+  const duzenle = (id, text, priority,priorityId) => {
     if (text === "") {
       setValid(false);
     } else {
-      dispatch(edit_job({ id: id, text: text, priority: priority }));
+      dispatch(edit_job({ id: id, text: text, priority: priority, priorityId:priorityId }));
       props.handleClose();
     }
   };
@@ -21,7 +22,9 @@ const JobEdit = (props) => {
   useEffect(() => {
     setEditPri(props.editPri);
     setEditText(props.editText);
-  }, []);
+    setEditPriId(props.editPriId);
+    console.log(props)
+  },[props.editPri, props.editText,props.editPriId]);
 
   return (
     <div className="popup-box jobEditBox">
@@ -44,10 +47,13 @@ const JobEdit = (props) => {
             name="priority"
             id="priority"
             value={editPri || "normal"}
-            onChange={(event) => setEditPri(event.target.value)}
+            onChange={(event) => {
+              setEditPriId(parseInt(event.target.options[event.target.selectedIndex].getAttribute('intvalue')))
+              setEditPri(event.target.value)}
+            }
           >
             {priorities.map((priority) => {
-              return <option key={priority.id} value={priority.value}>{priority.name}</option>;
+              return <option key={priority.id} intvalue={priority.intValue} value={priority.value}>{priority.name}</option>;
             })}
           </select>
         </Row>
@@ -63,7 +69,7 @@ const JobEdit = (props) => {
           <Col>
             <Button
               className="bg-danger text-white"
-              onClick={() => duzenle(props.editId, editText, editPri)}
+              onClick={() => duzenle(props.editId, editText, editPri,editPriId)}
             >
               Save
             </Button>
