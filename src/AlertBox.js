@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const AlertBox = (props) => {
   const alertBox = useSelector((state) => state.jobReducer.alertBox);
-  console.log(alertBox)
+  
   return (
     <div
       className="alertBox"

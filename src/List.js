@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Table, Col } from "reactstrap";
 import JobEdit from "./JobEdit";
 import { useSelector } from "react-redux";
 import Job from "./Job";
 
-const List = ({showAlert}) => {
+const List = ({ showAlert }) => {
   const [isOpen, setIsOpen] = useState(false);
   const jobs = useSelector((state) => state.jobReducer.jobs);
   const [editText, setEditText] = useState("");
@@ -15,15 +15,64 @@ const List = ({showAlert}) => {
   const [editId, setEditId] = useState(-1);
   const [filterPriority, setFilterPriority] = useState("all");
   const [filterSearch, setFilterSearch] = useState("");
+  const [sortedData, setSortedData] = useState([]);
+  const [sortNameDesc, setSortNameDesc] = useState(true);
+  const [sortPriorityDesc, setSortPriorityDesc] = useState(true);
+
+  const [currentSortStyle, setCurrentSortStyle] = useState("priority");
 
   const priorities = useSelector((state) => state.jobReducer.priorities);
 
-  const togglePopup = (id, text, pri,priId) => {
+  const togglePopup = (id, text, pri, priId) => {
     setEditId(id);
     setEditPri(pri);
     setEditText(text);
     setEditPriId(priId);
     setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    let array = jobs
+      .filter((job) =>
+        filterPriority === "all" ? true : job.priority === filterPriority
+      )
+      .filter((job) => job.text.includes(filterSearch));
+
+    if (currentSortStyle === "name") {
+      if (sortNameDesc) {
+        setSortedData(array.sort((a, b) => a.text.localeCompare(b.text)));
+      } else {
+        setSortedData(
+          array.sort((a, b) => a.text.localeCompare(b.text)).reverse()
+        );
+      }
+    } else if (currentSortStyle === "priority") {
+      if (sortPriorityDesc) {
+        setSortedData(array.sort((a, b) => b.priorityId - a.priorityId));
+      } else {
+        setSortedData(
+          array.sort((a, b) => b.priorityId - a.priorityId).reverse()
+        );
+      }
+    }
+  }, [
+    jobs,
+    filterPriority,
+    filterSearch,
+    currentSortStyle,
+    sortPriorityDesc,
+    sortNameDesc,
+  ]);
+
+  const sortDataBy = (type) => {
+    if (currentSortStyle === "name") {
+      console.log(sortNameDesc);
+      setSortNameDesc(!sortNameDesc);
+    } else if (currentSortStyle === "priority") {
+      setSortPriorityDesc(!sortPriorityDesc);
+    }
+
+    setCurrentSortStyle(type);
   };
 
   return (
@@ -67,7 +116,9 @@ const List = ({showAlert}) => {
                 <option value="all">Öncelik(Hepsi)</option>
                 {priorities.map((priority) => {
                   return (
-                    <option key={priority.id} value={priority.value}>{priority.name}</option>
+                    <option key={priority.id} value={priority.value}>
+                      {priority.name}
+                    </option>
                   );
                 })}
               </select>
@@ -77,36 +128,48 @@ const List = ({showAlert}) => {
             <Table striped>
               <thead>
                 <tr>
-                  <th className="w-auto">Name</th>
-                  <th style={{width:"150px"}}>Priority</th>
-                  <th style={{width:"110px"}}>Action</th>
+                  <th
+                    role="button"
+                    className="w-auto"
+                    onClick={() => sortDataBy("name")}
+                  >
+                    Name ⬍
+                  </th>
+                  <th
+                    role="button"
+                    style={{ width: "150px" }}
+                    onClick={() => sortDataBy("priority")}
+                  >
+                    Priority ⬍
+                  </th>
+                  <th style={{ width: "110px" }}>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {jobs &&
-                  jobs
-                    .filter((job) =>
-                      filterPriority === "all"
-                        ? true
-                        : job.priority === filterPriority
-                    )
-                    .filter((job) => job.text.includes(filterSearch))
-                    .sort((a,b) => b.priorityId - a.priorityId)
-                    .map((job) => {
-                      //console.log(jobs)
-                      return (
-                        <Job
-                          key={job.id}
-                          togglePopup={togglePopup}
-                          jobText={job.text}
-                          jobPriText={priorities.filter(pri=>pri.value===job.priority)[0]?priorities.filter(pri=>pri.value===job.priority)[0].name:job.priority}
-                          jobPri={job.priority}
-                          jobId={job.id}
-                          jobPriId={job.priorityId}
-                          showAlert={showAlert}
-                        />
-                      );
-                    })}
+                {sortedData.map((job) => {
+                  //console.log(jobs)
+
+                  return (
+                    <Job
+                      key={job.id}
+                      togglePopup={togglePopup}
+                      jobText={job.text}
+                      jobPriText={
+                        priorities.filter(
+                          (pri) => pri.value === job.priority
+                        )[0]
+                          ? priorities.filter(
+                              (pri) => pri.value === job.priority
+                            )[0].name
+                          : job.priority
+                      }
+                      jobPri={job.priority}
+                      jobId={job.id}
+                      jobPriId={job.priorityId}
+                      showAlert={showAlert}
+                    />
+                  );
+                })}
               </tbody>
             </Table>
           </Row>
