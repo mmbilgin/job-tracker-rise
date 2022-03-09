@@ -11,8 +11,10 @@ import { set_priorities } from "./redux/jobSlice";
 
 const App = () => {
   const dispatch = useDispatch();
+  const pageUri = window.location.href.substring(0,window.location.href.length-1);
+  console.log(pageUri)
   useEffect(() => {
-    fetch("http://localhost:8080/priorities", {
+    fetch(pageUri+":8080/priorities", {
       method: "GET",
       mode: "cors",
       headers: {},
