@@ -6,9 +6,9 @@ const lastIdFromLocalStorage = JSON.parse(
   localStorage.getItem("lastID-jt") || 0
 );
 const defaultPriorities = [
-  { id: 1, name: "Normal", value: "normal", intValue: 1 },
-  { id: 2, name: "Onemli", value: "onemli", intValue: 2 },
-  { id: 3, name: "Acil", value: "acil", intValue: 3 },
+  { id: 1, name: "Normal", value: "normal", intValue: 1, color: "gray" },
+  { id: 2, name: "Onemli", value: "onemli", intValue: 2,color: "orange"},
+  { id: 3, name: "Acil", value: "acil", intValue: 3,color: "red"},
 ];
 const updateLocalStorage = (state) => {
   localStorage.setItem("jobs-jt", JSON.stringify(state.jobs));

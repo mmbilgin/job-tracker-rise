@@ -23,7 +23,7 @@ const JobEdit = (props) => {
     setEditPri(props.editPri);
     setEditText(props.editText);
     setEditPriId(props.editPriId);
-    console.log(props)
+    //console.log(props)
   },[props.editPri, props.editText,props.editPriId]);
 
   return (
