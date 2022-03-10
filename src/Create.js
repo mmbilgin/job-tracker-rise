@@ -28,7 +28,7 @@ const Create = ({ showAlert }) => {
       setText("");
       setPri("normal");
       setPriInt(1);
-      showAlert("Yeni bir iş başarıyla eklendi.", "orange", "white");
+      showAlert("Yeni bir iş eklendi.", "orange", "white");
     }
   };
   return (
