@@ -90,7 +90,7 @@ const List = ({ showAlert }) => {
       <Container>
         <Row className="jobListRow">
           <Row className="title">İş Listesi</Row>
-          <Row>
+          <Row className="searchRow">
             <Col md="9" xs="7">
               <div className="searchContainer">
                 <input
@@ -126,7 +126,7 @@ const List = ({ showAlert }) => {
           </Row>
           <Row>
             <Table striped>
-              <thead>
+              <thead className="titleHead">
                 <tr>
                   <th
                     role="button"
