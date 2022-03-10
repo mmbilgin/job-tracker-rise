@@ -42,6 +42,7 @@ const Create = ({ showAlert }) => {
               <Row>
                 <input
                   type="text"
+                  maxLength={255}
                   className={(valid ? "" : "formNotValid") + " job-name"}
                   id="createText"
                   value={text}

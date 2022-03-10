@@ -44,6 +44,7 @@ const JobEdit = (props) => {
             disabled
             id="job_name"
             value={editText}
+            maxLength={255}
             className={valid ? "" : "formNotValid"}
             onChange={(event) => {
               setValid(true);
