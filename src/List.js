@@ -89,7 +89,7 @@ const List = ({ showAlert }) => {
       )}
       <Container>
         <Row className="jobListRow">
-          <Row className="title">Job List</Row>
+          <Row className="title">İş Listesi</Row>
           <Row>
             <Col md="9" xs="7">
               <div className="searchContainer">
@@ -133,16 +133,16 @@ const List = ({ showAlert }) => {
                     className="w-auto"
                     onClick={() => sortDataBy("name")}
                   >
-                    Name ⬍
+                    Tanım ⬍
                   </th>
                   <th
                     role="button"
                     style={{ width: "150px" }}
                     onClick={() => sortDataBy("priority")}
                   >
-                    Priority ⬍
+                    Öncelik ⬍
                   </th>
-                  <th style={{ width: "110px" }}>Action</th>
+                  <th style={{ width: "110px" }}>Eylem</th>
                 </tr>
               </thead>
               <tbody>

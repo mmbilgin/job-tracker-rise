@@ -37,8 +37,8 @@ const JobEdit = (props) => {
   return (
     <div className="popup-box jobEditBox">
       <Container className="bg-white box">
-        <Row className="title">Job Edit</Row>
-        <Row className="subtitle">Job Name</Row>
+        <Row className="title">İş Düzenleme</Row>
+        <Row className="subtitle">İşin Tanımı</Row>
         <Row>
           <input
             disabled
@@ -51,7 +51,7 @@ const JobEdit = (props) => {
             }}
           ></input>
         </Row>
-        <Row className="subtitle">Job Priority</Row>
+        <Row className="subtitle">İşin Önceliği</Row>
         <Row>
           <select
             name="priority"
@@ -87,7 +87,7 @@ const JobEdit = (props) => {
               className="bg-secondary text-white"
               onClick={props.handleClose}
             >
-              Cancel
+              Vazgeç
             </Button>
           </Col>
           <Col>
@@ -97,7 +97,7 @@ const JobEdit = (props) => {
                 duzenle(props.editId, editText, editPri, editPriId)
               }
             >
-              Save
+              Kaydet
             </Button>
           </Col>
         </Row>

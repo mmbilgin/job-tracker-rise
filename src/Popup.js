@@ -16,10 +16,10 @@ const Popup = (props) => {
             className="bg-secondary text-white"
             onClick={props.handleClose}
           >
-            Cancel
+            Vazgeç
           </Button>
           <Button className="bg-danger text-white" onClick={props.removeJob}>
-            Approve
+            Kabul Et
           </Button>
         </div>
             </Row>

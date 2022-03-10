@@ -35,7 +35,7 @@ const Job = ({
         {jobText}
         {isOpen && (
           <Popup
-            content="Are you sure you want to delete it ?"
+            content="Silmek istediğinize emin misiniz?"
             removeJob={sil}
             handleClose={toggleRemovePopup}
           />

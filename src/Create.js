@@ -35,10 +35,10 @@ const Create = ({ showAlert }) => {
     <div>
       <Container>
         <Row className="createRow">
-          <Row className="title">Create New Job</Row>
+          <Row className="title">Yeni İş Ekleme</Row>
           <Row className="other">
             <Col xs="7" md="6">
-              <Row className="subtitle">Job Name</Row>
+              <Row className="subtitle">İş Tanımı</Row>
               <Row>
                 <input
                   type="text"
@@ -54,7 +54,7 @@ const Create = ({ showAlert }) => {
             </Col>
 
             <Col xs="5" md="4" className="other">
-              <Row className="subtitle">Job Priority</Row>
+              <Row className="subtitle">İşin Önceliği</Row>
               <Row>
                 <select
                   name="priority"
@@ -91,7 +91,7 @@ const Create = ({ showAlert }) => {
               </Row>
               <Row>
                 <Button color="primary" onClick={() => ekle(text, pri, priInt)}>
-                  Create
+                  Ekle
                 </Button>
               </Row>
             </Col>
